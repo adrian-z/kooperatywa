@@ -1,0 +1,5 @@
+zmiany adrian 22.01.11:
+
+- dodane zmienianie tury z poziomu panelu (nowa_tura2)
+- dodana sezonowosc (w tabeli produktow, w formacie 01, cyfry odpowiadaja kolejnym miesiacom, czyli np. 110000000000 daje sezon w styczniu i lutym)
+- poprawione wyswietlanie przez uzytkownikow wstecznych rachunkow

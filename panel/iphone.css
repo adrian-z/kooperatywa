@@ -1,0 +1,10 @@
+body,a,td {font-family:Arial;font-size: 25px;}
+
+td {padding:12px;}
+
+input {
+    -webkit-text-size-adjust: 240%;
+    width:150px;
+}
+
+

@@ -1,0 +1,58 @@
+<?php
+session_start ();
+if (! session_is_registered ( "spoldzielnia_admin" ) ) //if your variable isn't there, then the session must not be
+{
+		session_unset (); //so lets destroy whatever session there was and bring them to login page
+		session_destroy ();
+		$url = "Location: index.php";
+		header ( $url );
+}
+else //otherwise, they can see the page
+{
+?>
+
+<?include("naglowek.php"); 
+$user=$_GET['user'];
+$id=$_GET['id'];
+?>
+
+<div id="header">
+	<h1>Kooperatywa</h1>
+	<a href="admin.php" id="backButton">menu</a>
+</div>
+
+<h1>Wprowadz dodatkowe towary :</h1>
+W tym formularzu wprowadzamy towar, który <? print ("$user"); ?> kupi³/a w czasie spotkania kooperatywy (inne ni¿ wcze¶niej zamówione). <p>
+	<? 
+	include("../funkcje.php");
+	polacz_z_baza();
+	$tura=id_aktualnej_tury();
+	$q= mysql_query("SELECT id FROM spoldzielnia_userzy WHERE nazwisko=\"$user\"");
+	$zap = mysql_fetch_array($q) or print "dupa ";
+	$id_user = $zap[0];
+
+
+$produkty = mysql_query("SELECT id, nazwa FROM spoldzielnia_produkty ORDER BY nazwa");
+
+print ("<form action=dodaj_towar_zak_2.php method=\"post\">");
+
+print("<select name=\"id\">");
+while ($row = mysql_fetch_array($produkty)) {
+	$id= $row['id'];
+	$nazwa=$row['nazwa'];
+	print("<option value=$id> $nazwa</option>");
+}
+
+print("</select>");
+print("<input type=\"hidden\" name=\"user\" value=\"$id_user\">");
+print ("ILOSC: <input name=\"ilosc\" size=8> </input> ");
+print ("<input type=\"submit\" value=\"Dodaj!\">");
+print ("</form>");
+
+
+
+	include("stopka.php"); 
+ }
+
+
+
